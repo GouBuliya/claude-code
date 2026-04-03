@@ -562,5 +562,7 @@
   "auth.apiKeyPrompt": "Do you want to use this API key?",
   "auth.apiKeyYes": "Yes",
   "auth.apiKeyNo": "No",
-  "auth.apiKeyRecommended": "recommended"
+  "auth.apiKeyRecommended": "recommended",
+  "file.readFile": "Read file",
+  "file.editFile": "Edit file"
 }

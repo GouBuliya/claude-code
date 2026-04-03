@@ -48,8 +48,7 @@ export function FilesystemPermissionRequest(t0) {
   }
   const userFacingName = t2;
   const isReadOnly = toolUseConfirm.tool.isReadOnly(toolUseConfirm.input);
-  const userFacingReadOrEdit = isReadOnly ? t('file.read') : t('file.edit');
-  const title = t('file.file');
+  const title = isReadOnly ? t('file.readFile') : t('file.editFile');
   const parseInput = _temp;
   if (!path) {
     let t3;

@@ -188,5 +188,6 @@ export function getUnifiedDiffString(
   const oldStr = oldContent ?? ''
   const newStr = newContent ?? ''
   if (oldStr === newStr) return ''
-  return createPatch(filePath, oldStr, newStr)
+  const patch = createPatch(filePath, escapeForDiff(oldStr), escapeForDiff(newStr))
+  return unescapeFromDiff(patch)
 }

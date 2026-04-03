@@ -28,7 +28,7 @@ import { isInProcessTeammateTask } from '../tasks/InProcessTeammateTask/types.js
 import { isBackgroundTask } from '../tasks/types.js';
 import { getAllInProcessTeammateTasks } from '../tasks/InProcessTeammateTask/InProcessTeammateTask.js';
 import { getEffortSuffix } from '../utils/effort.js';
-import { t } from '../i18n/index.js';
+import { t, useLocale } from '../i18n/index.js';
 import { getMainLoopModel } from '../utils/model/model.js';
 import { getViewedTeammateTask } from '../state/selectors.js';
 import { TEARDROP_ASTERISK } from '../constants/figures.js';
@@ -184,9 +184,10 @@ function SpinnerWithVerbInner({
   const currentTodo = tasksV2?.find(task => task.status !== 'pending' && task.status !== 'completed');
   const nextTask = findNextPendingTask(tasksV2);
 
-  // Get spinner verb on each render to ensure translation is up-to-date
-  // Don't use useState to cache this, as i18n may not be initialized on first render
-  const randomVerb = sample(getSpinnerVerbs());
+  const locale = useLocale();
+
+  // Sample a stable random verb; re-sample only when locale changes to avoid flicker
+  const randomVerb = useMemo(() => sample(getSpinnerVerbs()), [locale]);
 
   // Leader's own verb (always the leader's, regardless of who is foregrounded)
   const leaderVerb = overrideMessage ?? currentTodo?.activeForm ?? currentTodo?.subject ?? randomVerb;
@@ -418,8 +419,8 @@ function BriefSpinner(t0) {
   const { mode, overrideMessage } = t0;
   const settings = useSettings();
   const reducedMotion = settings.prefersReducedMotion ?? false;
-  // Get spinner verb on each render to ensure translation is up-to-date
-  const randomVerb = sample(getSpinnerVerbs()) ?? "Working";
+  const locale = useLocale();
+  const randomVerb = useMemo(() => sample(getSpinnerVerbs()) ?? t('spinner.working'), [locale]);
   const verb = overrideMessage ?? randomVerb;
   const connStatus = useAppState(_temp5);
   let t1;

@@ -562,5 +562,7 @@
   "auth.apiKeyPrompt": "您想使用此 API 密钥吗？",
   "auth.apiKeyYes": "是",
   "auth.apiKeyNo": "否",
-  "auth.apiKeyRecommended": "推荐"
+  "auth.apiKeyRecommended": "推荐",
+  "file.readFile": "读取文件",
+  "file.editFile": "编辑文件"
 }
